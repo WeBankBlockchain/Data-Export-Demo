@@ -1,0 +1,35 @@
+// Apply the java-library plugin to add support for Java Library
+plugins {
+    id 'java'
+    id 'idea'
+}
+println("Notice: current gradle version is " + gradle.gradleVersion)
+// Additional attribute definition
+
+archivesBaseName = 'Data-Export-Demo'
+version = '1.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url "https://oss.sonatype.org/service/local/staging/deploy/maven2"}
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url 'https://jitpack.io' }
+
+}
+
+
+
+dependencies {
+    implementation 'com.github.WeBankBlockchain:Data-Export:DataExport-SDK-Beta-SNAPSHOT'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 30, 'seconds'
+}
+
+
