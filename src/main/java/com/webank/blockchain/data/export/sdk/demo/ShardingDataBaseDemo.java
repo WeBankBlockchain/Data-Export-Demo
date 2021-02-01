@@ -20,12 +20,12 @@ public class ShardingDataBaseDemo {
     public static void main(String[] args) throws ConfigException, InterruptedException {
         //配置其中[]内容配置即可测试
         MysqlDataSource mysqlDataSourc = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .pass("password")
                 .user("username")
                 .build();
         MysqlDataSource mysqlDataSourc1 = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .pass("password")
                 .user("username")
                 .build();
