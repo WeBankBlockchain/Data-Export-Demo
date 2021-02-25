@@ -24,7 +24,7 @@ repositories {
 
 
 dependencies {
-    compile 'com.webank:data-export-sdk:1.7.0'
+    compile 'com.webank:data-export-sdk:1.7.1-SNAPSHOT'
 }
 
 
