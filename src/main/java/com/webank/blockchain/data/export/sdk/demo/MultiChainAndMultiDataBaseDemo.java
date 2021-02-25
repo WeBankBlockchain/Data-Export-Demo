@@ -39,7 +39,7 @@ public class MultiChainAndMultiDataBaseDemo {
                 //链节点连接信息
                 .nodeStr("[ip]:[port]")
                 //链连接证书位置
-                .certPath("config")
+                .certPath("config_user_0")
                 //群组id
                 .groupId(1)
                 .build());
@@ -69,7 +69,7 @@ public class MultiChainAndMultiDataBaseDemo {
                 //链节点连接信息
                 .nodeStr("[ip]:[port]")
                 //链连接证书位置
-                .certPath("config")
+                .certPath("config_user_1")
                 //群组id
                 .groupId(1)
                 .build());
