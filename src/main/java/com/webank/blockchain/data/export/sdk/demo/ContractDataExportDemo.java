@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ContractDataExportDemo {
 
-    public static void main(String[] args) throws ConfigException, InterruptedException {
+    public static void main(String[] args) throws Exception, InterruptedException {
         MysqlDataSource mysqlDataSourc = MysqlDataSource.builder()
                 .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .pass("password")
@@ -34,6 +34,7 @@ public class ContractDataExportDemo {
                 .build();
 
         ExportConfig exportConfig = new ExportConfig();
+        //配置合约信息，可配置多合约
         List<ContractInfo> contractInfoList = Lists.newArrayList();
         exportConfig.setContractInfoList(contractInfoList);
         ContractInfo contractInfo = new ContractInfo()
