@@ -20,13 +20,13 @@ public class ShardingDataBaseDemo {
     public static void main(String[] args) throws Exception, InterruptedException {
         //数据库配置信息
         MysqlDataSource mysqlDataSourc = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .user("username")
                 .pass("password")
                 .build();
         //数据库配置信息
         MysqlDataSource mysqlDataSourc1 = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .user("username")
                 .pass("password")
                 .build();

@@ -22,7 +22,7 @@ public class StashClientDemo {
     public static void main(String[] args) throws Exception {
         //数据库配置信息
         MysqlDataSource mysqlDataSourc = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .user("username")
                 .pass("password")
                 .build();
@@ -39,7 +39,7 @@ public class StashClientDemo {
                 .build();
         //数据导出执行器构建
         DataExportExecutor exportExecutor = ExportDataSDK.create(dataSource, StashInfo.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .user("username")
                 .pass("password")
                 // chain cryptoType, gm-1

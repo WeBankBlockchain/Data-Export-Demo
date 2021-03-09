@@ -19,7 +19,7 @@ public class MultiGroupsAndSingleDataBaseDemo {
 
     public static void main(String[] args) throws Exception {
         MysqlDataSource mysqlDataSourc = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .user("username")
                 .pass("password")
                 .build();

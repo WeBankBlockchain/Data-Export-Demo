@@ -19,7 +19,7 @@ public class MultiChainAndMultiDataBaseDemo {
     public static void main(String[] args) throws Exception {
         //数据库配置信息
         MysqlDataSource mysqlDataSourc1 = MysqlDataSource.builder()
-                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]")
+                .jdbcUrl("jdbc:mysql://[ip]:[port]/[database]?autoReconnect=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                 .user("username")
                 .pass("password")
                 .build();
