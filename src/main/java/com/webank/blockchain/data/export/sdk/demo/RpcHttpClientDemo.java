@@ -29,7 +29,7 @@ public class RpcHttpClientDemo {
                 .autoCreateTable(true)
                 .build();
         //通过rpc通道导出数据，需要打开链上对应rpc端口的监听
-        //与channel通道同时设置后，优先RPC通道
+        //与channel通道同时设置时，使用RPC通道
         DataExportExecutor exportExecutor = ExportDataSDK.create(dataSource, ChainInfo.builder()
                 .rpcUrl("http://127.0.0.1:8546")
                  // chain cryptoType, gm-1
