@@ -1,31 +1,74 @@
-// Apply the java-library plugin to add support for Java Library
 plugins {
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'eclipse'
     id 'idea'
 }
-println("Notice: current gradle version is " + gradle.gradleVersion)
-// Additional attribute definition
 
-archivesBaseName = 'Data-Export-Demo'
-version = '1.0.0'
+group = 'com.webank'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-// In this section you declare where to find the dependencies of your project
-repositories {
-    mavenCentral()
-    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-    maven { url "https://oss.sonatype.org/service/local/staging/deploy/maven2"}
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "https://dl.bintray.com/ethereum/maven/" }
+    mavenLocal()
+    mavenCentral()
+}
 
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
     compile 'com.webank:data-export-sdk:1.7.1-SNAPSHOT'
+
 }
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources  {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+bootJar {
+    destinationDir file('dist')
+    archiveName project.name + "-" + version + '.jar'
+
+    exclude '**/*.properties'
+
+    doLast {
+        copy {
+            from configurations.runtime
+            into 'dist/lib'
+        }
+        copy {
+            from file('src/main/resources')
+            into 'dist/config/'
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
 
 
 configurations.all {
