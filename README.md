@@ -8,9 +8,6 @@
 | FISCO-BCOS | 2.0及以上版本 | |
 | MySQL | >= mysql-community-server[5.7] | |
 
-### Docker安装
-
-参考[Docker安装](https://www.runoob.com/docker/centos-docker-install.html)
 
 ### 获取启动脚本和配置文件
 
@@ -95,6 +92,15 @@ system.contract0.abi=
 system.contract0.binary=
 ```
 
+如果链或者数据库为本地安装，需查询本机ip，替换上述配置中的localhost 或者 127.0.0.1 地址
+
+查询ip命令为：
+
+```
+   ifconfig | grep "inet " | grep -v 127.0.0.1
+```
+其中inet后的ip地址，即为本机ip
+
 更多配置参见application.properties文件，还包括ES存储、多活、分库分表、可视化等多种配置，可按需配置。
 
 
@@ -103,6 +109,7 @@ system.contract0.binary=
 ```
    bash build_export.sh
 ```
+基本会自动安装docker，并拉取对应镜像，进行执行。
 控制台可看到提示启动结果：
 
 ```
@@ -111,10 +118,21 @@ data export run success
 
 通过如下命令可查看运行日志：
 ```
-    docker logs -f dataexport
+    docker logs -f export
 ```
 
+### 修改配置
 
+停止运行，命令如下
+```
+    docker stop export
+```
+
+修改配置后，重新启动，命令如下
+
+```
+    docker restart export
+```
 
 
 

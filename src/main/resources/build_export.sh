@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
 LANG=zh_CN.UTF-8
 
+
+function docker_install()
+{
+	echo "check Docker......"
+	docker -v
+    if [ $? -eq  0 ]; then
+        echo "Docker already installed!"
+    else
+    	echo "install docker ..."
+        curl -sSL https://get.daocloud.io/docker | sh
+        echo "install docker...success!"
+    fi
+    # create share network==bridge
+    #docker network create share_network
+}
+
+docker_install
+
+
 # @function: output information log
 # @param: content: information message
 function LOG_INFO()
