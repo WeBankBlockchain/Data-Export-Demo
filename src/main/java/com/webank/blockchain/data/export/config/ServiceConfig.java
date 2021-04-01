@@ -1,16 +1,22 @@
 package com.webank.blockchain.data.export.config;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import com.webank.blockchain.data.export.common.entity.ContractInfo;
 import com.webank.blockchain.data.export.common.entity.ESDataSource;
 import com.webank.blockchain.data.export.common.entity.MysqlDataSource;
 import com.webank.blockchain.data.export.utils.PropertiesUtils;
 import lombok.Data;
+import org.beetl.core.GroupTemplate;
+import org.beetl.core.resource.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +33,7 @@ public class ServiceConfig {
     private String nodeStr;
     private int groupId;
     private String certPath;
+
 
     private int cryptoTypeConfig;
     private String rpcUrl;
@@ -98,7 +105,18 @@ public class ServiceConfig {
 
     private ESDataSource esDataSource;
 
+    private boolean grafanaEnable;
 
+    @Autowired
+    private PropertiesUtils PropertiesUtils;
+
+    @Bean
+    public GroupTemplate getGroupTemplateInstance() throws IOException {
+        ClasspathResourceLoader resourceLoader = new ClasspathResourceLoader("");
+        org.beetl.core.Configuration cfg = org.beetl.core.Configuration.defaultConfiguration();
+        GroupTemplate gt = new GroupTemplate(resourceLoader, cfg);
+        return gt;
+    }
 
     @PostConstruct
     private void init() {

@@ -17,17 +17,15 @@ import com.webank.blockchain.data.export.common.entity.ContractInfo;
 import com.webank.blockchain.data.export.common.entity.MysqlDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * PropertiesUtils
@@ -40,46 +38,34 @@ import java.util.Properties;
 @Component
 public class PropertiesUtils {
 
-    private static InputStream stream;
-    private static Properties properties = new Properties();
+    @Autowired
+    private Environment environment;
 
-    static {
-        stream = PropertiesUtils.class.getClassLoader().getResourceAsStream("classpath:application.properties");
-        if (stream == null){
-            stream = PropertiesUtils.class.getClassLoader().getResourceAsStream("file:./config/application.properties");
-            log.info("find application config in ./config/application.properties");
-        }
-        try {
-            properties.load(stream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * return the first mapping result of args.
      *
      * @return property value
      */
-    public static String getProperty(String... args) {
+    public  String getProperty(String... args) {
         StringBuilder key = new StringBuilder(args[0]);
         for (int i = 1 ; i < args.length; i++) {
             key.append(".").append(args[i]);
         }
-        return properties.getProperty(key.toString());
+        return environment.getProperty(key.toString());
     }
 
 
-    public static List<MysqlDataSource> getMysqlConfigs() {
+    public  List<MysqlDataSource> getMysqlConfigs() {
         List<MysqlDataSource> dataSources = new ArrayList<>();
         int i = 0;
         while (true) {
-            String dbUrl = PropertiesUtils.getProperty("system", "db" + i, "dbUrl");
+            String dbUrl = getProperty("system", "db" + i, "dbUrl");
             if (StringUtils.isBlank(dbUrl)) {
                 break;
             }
-            String user = PropertiesUtils.getProperty("system", "db" + i, "user");
-            String password = PropertiesUtils.getProperty("system", "db" + i, "password");
+            String user = getProperty("system", "db" + i, "user");
+            String password = getProperty("system", "db" + i, "password");
             MysqlDataSource mysqlDataSource = MysqlDataSource.builder()
                     .jdbcUrl(dbUrl)
                     .user(user)
@@ -92,16 +78,16 @@ public class PropertiesUtils {
     }
 
 
-    public static List<ContractInfo> getContractInfos() {
+    public  List<ContractInfo> getContractInfos() {
         List<ContractInfo> dataSources = new ArrayList<>();
         int i = 0;
         while (true) {
-            String contractName = PropertiesUtils.getProperty("system", "contract" + i, "contractName");
+            String contractName = getProperty("system", "contract" + i, "contractName");
             if (StringUtils.isBlank(contractName)) {
                 break;
             }
-            String abi = PropertiesUtils.getProperty("system", "contract" + i, "abi");
-            String binary = PropertiesUtils.getProperty("system", "contract" + i, "binary");
+            String abi = getProperty("system", "contract" + i, "abi");
+            String binary = getProperty("system", "contract" + i, "binary");
             ContractInfo contractInfo = new ContractInfo()
                     .setBinary(binary)
                     .setAbi(abi)
@@ -112,8 +98,8 @@ public class PropertiesUtils {
         return dataSources;
     }
 
-    public static Map<String, List<String>> getGeneratedOff() {
-        String generatedOffStr = PropertiesUtils.getProperty("system", "generatedOffStr");
+    public  Map<String, List<String>> getGeneratedOff() {
+        String generatedOffStr = getProperty("system", "generatedOffStr");
         if (generatedOffStr == null) {
             return null;
         }
@@ -132,8 +118,8 @@ public class PropertiesUtils {
         return map;
     }
 
-    public static Map<String, Map<String, List<String>>> getIgnoreParam() {
-        String ignoreParam = PropertiesUtils.getProperty("system", "ignoreParam");
+    public  Map<String, Map<String, List<String>>> getIgnoreParam() {
+        String ignoreParam = getProperty("system", "ignoreParam");
         if (ignoreParam == null) {
             return null;
         }
@@ -160,8 +146,8 @@ public class PropertiesUtils {
         return map;
     }
 
-    public static Map<String, Map<String, Map<String, String>>> getparamSQLType() {
-        String paramSQLType = PropertiesUtils.getProperty("system", "paramSQLType");
+    public  Map<String, Map<String, Map<String, String>>> getparamSQLType() {
+        String paramSQLType = getProperty("system", "paramSQLType");
         if (paramSQLType == null) {
             return null;
         }

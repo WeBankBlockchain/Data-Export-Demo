@@ -31,7 +31,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-    compile 'com.webank:data-export-sdk:1.7.1-SNAPSHOT'
+    compile 'com.webank:data-export-sdk:1.7.2-SNAPSHOT'
+    implementation('com.ibeetl:beetl:2.9.3')
 
 }
 
