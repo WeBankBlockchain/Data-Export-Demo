@@ -32,7 +32,8 @@ config为配置文件目录，使用channel方式连接区块链时，需将证�
 log为运行日志保存的地方。
 
 
-### 配置证书
+### 配置证书（channel方式启动）
+
 将SDK证书拷贝到 **./tools/config/resources目录**下，SDK证书目录位于nodes/${ip}/sdk/目录下
 ```
 # 假设SDK证书位于~/fisco/nodes/127.0.0.1/sdk/目录
@@ -92,15 +93,6 @@ system.contract0.abi=
 system.contract0.binary=
 ```
 
-如果链或者数据库为本地安装，需查询本机ip，替换上述配置中的localhost 或者 127.0.0.1 地址
-
-查询ip命令为：
-
-```
-   ifconfig | grep "inet " | grep -v 127.0.0.1
-```
-其中inet后的ip地址，即为本机ip
-
 更多配置参见application.properties文件，还包括ES存储、多活、分库分表、可视化等多种配置，可按需配置。
 
 
@@ -135,6 +127,21 @@ docker restart export
 ```
 
 
+### 问题
+
+#### docker与数据库或链在一台机器上，docker无法访问宿主机
+
+如果链或者数据库为本地安装，需查询本机ip，替换上述配置中的localhost 或者 127.0.0.1 地址。
+
+启动脚本中已对本地ip进行了查询并替换，如果失败，可以按照下列命令查询并手动替换。
+
+查询ip命令为：
+
+```
+   ifconfig | grep "inet " | grep -v 127.0.0.1
+```
+
+其中inet后的ip地址，即为本机ip
 
 
 
