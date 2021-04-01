@@ -17,8 +17,7 @@ curl -#LO https://github.com/WeBankBlockchain/Data-Export-Demo/releases/download
 
 解压文件包至当前目录
 ```
-   tar -zxvf data-export-1.7.2-beta.tar.gz data-export
-   cd data-export && chmod -x build_export.sh
+tar -zxvf data-export-1.7.2-beta.tar.gz && cd data-export-1.7.2-beta && chmod -x build_export.sh
 ```
 data-export目录如下：
 ```
