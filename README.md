@@ -45,7 +45,7 @@ cp -r ~/fisco/nodes/127.0.0.1/sdk/* ./data-export/config/
 配置文件application.properties位于config目录下，进入config
 
 ```
-   cd config
+cd config
 ```
 
 修改application.properties文件：该文件包含了所有的配置信息。以下配置信息是必须要修改的：
@@ -107,7 +107,7 @@ system.contract0.binary=
 ### 启动脚本
 
 ```
-   bash build_export.sh
+bash build_export.sh
 ```
 基本会自动安装docker，并拉取对应镜像，进行执行。
 控制台可看到提示启动结果：
@@ -118,20 +118,20 @@ data export run success
 
 通过如下命令可查看运行日志：
 ```
-    docker logs -f export
+docker logs -f export
 ```
 
 ### 修改配置
 
 停止运行，命令如下
 ```
-    docker stop export
+docker stop export
 ```
 
 修改配置后，重新启动，命令如下
 
 ```
-    docker restart export
+docker restart export
 ```
 
 
