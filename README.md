@@ -93,8 +93,17 @@ system.contract0.abi=
 system.contract0.binary=
 ```
 
-更多配置参见application.properties文件，还包括ES存储、多活、分库分表、可视化等多种配置，可按需配置。
 
+### 可视化安装配置
+
+在application.properties中将grafana打开时，将在docker中自动部署grafana，通过[ip]:3000即可访问，配置如下:
+```
+system.grafanaEnable=true
+```
+
+### 更多配置
+
+更多配置参见application.properties文件，还包括ES存储、多活、分库分表等多种配置，可按需配置。
 
 ### 启动脚本
 
@@ -106,8 +115,22 @@ bash build_export.sh
 控制台可看到提示启动结果：
 
 ```
+......
+docker.io/wangyue168git/dataexport:1.7.2
+b7c087943edbe731304c76bcc44d705d20a8362fa8f2271d0d03ca6c75ee061c
 data export run success
+See the logging command: docker logs -f dataexport
+.....
+
 ```
+
+如果打开了grafana，则可看到执行提示如下：
+```
+docker.io/grafana/grafana:latest
+c9cc7e8920c17d0f5421808b058a2f39e827234c0b781f393b8e60ef8d073d86
+grafana run success
+```
+
 
 通过如下命令可查看运行日志：
 ```
@@ -126,6 +149,22 @@ docker stop export
 ```
 docker restart export
 ```
+
+### 可视化展示配置
+
+在application.properties中将grafana打开时，系统将会生成可视化json脚本 default_dashboard.json 文件，位于config目录下。
+
+grafana安装并启动成功，通过访问[ip]:3000（本机则为localhost:3000）即可看到如下界面：
+![](./image/grafana_start.png)
+
+输入账密admin/admin, 现在跳过即可进入主界面，添加导出数据库的mysql信息，如下位置：
+![](./image/grafana_index.png)
+
+添加mysql成功后，可通过如下方式导入系统生成的default_dashboard.json文件，如下位置：
+![](./image/grafana_json.png)
+
+导入成功后即可看到链的数据可视化情况，如下：
+![](./image/grafana_view.png)
 
 
 ### 问题
