@@ -15,16 +15,12 @@ package com.webank.blockchain.data.export.grafana;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.webank.blockchain.data.export.common.bo.contract.ContractDetail;
 import com.webank.blockchain.data.export.common.bo.contract.ContractMapsInfo;
 import com.webank.blockchain.data.export.common.bo.contract.EventMetaInfo;
 import com.webank.blockchain.data.export.common.bo.contract.MethodMetaInfo;
-import com.webank.blockchain.data.export.common.entity.DataExportContext;
-import com.webank.blockchain.data.export.common.entity.ExportConfig;
-import com.webank.blockchain.data.export.common.entity.ExportConstant;
 import com.webank.blockchain.data.export.config.ServiceConfig;
-import com.webank.blockchain.data.export.parser.contract.ContractParser;
+import com.webank.blockchain.data.export.contract.ContractParser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.beetl.core.GroupTemplate;
@@ -107,18 +103,7 @@ public class GrafanaGenerateService {
     }
 
     private ContractMapsInfo getContractInfo(){
-        DataExportContext currentContext = new DataExportContext();
-        ExportConfig config = new ExportConfig();
-        config.setIgnoreParam(this.config.getIgnoreParam());
-        config.setGeneratedOff(this.config.getGeneratedOff());
-        config.setParamSQLType(this.config.getParamSQLType());
-        config.setNamePrefix(this.config.getNamePrefix());
-        config.setNamePostfix(this.config.getNamePostfix());
-        config.setTablePrefix(this.config.getTablePrefix());
-        config.setTablePostfix(this.config.getTablePrefix());
-        currentContext.setConfig(config);
-        ExportConstant.setCurrentContext(currentContext);
-        return ContractParser.initContractMaps(config.getContractInfoList());
+        return ContractParser.initContractMaps(this.config.getContractInfos(),config);
     }
 
     public void write(String dashboardStr) {

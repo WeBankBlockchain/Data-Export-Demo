@@ -13,10 +13,12 @@
  */
 package com.webank.blockchain.data.export.grafana;
 
+import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
 import com.webank.blockchain.data.export.common.bo.contract.FieldVO;
 import com.webank.blockchain.data.export.common.bo.contract.MethodMetaInfo;
-import com.webank.blockchain.data.export.common.entity.TableSQL;
+import com.webank.blockchain.data.export.config.ServiceConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -36,6 +38,8 @@ import static com.webank.blockchain.data.export.grafana.GrafanaConstant.GRAFANA_
 @Component
 public class GrafanaPanelTableParasMethod implements AtomicParas<MethodMetaInfo> {
 
+    @Autowired
+    private ServiceConfig config;
 
     @Override
     public Map<String, Object> getMap(MethodMetaInfo info) {
@@ -44,10 +48,16 @@ public class GrafanaPanelTableParasMethod implements AtomicParas<MethodMetaInfo>
         map.put("list", list);
 
         String className = info.getContractName() + StringUtils.capitalize(info.getMethodName());
-        String tableName = TableSQL.getTableName(info.getContractName(),info.getMethodName());
+        String tableName = getTableName(info.getContractName(),info.getMethodName());
         map.put("table_name", tableName);
         map.put("title", className);
         return map;
+    }
+
+    public String getTableName(String contractName,String name){
+        String tablePrefix = config.getTablePrefix();
+        String tablePostfix = config.getTablePostfix();
+        return tablePrefix + contractName + "_" + StrUtil.toUnderlineCase(name) + tablePostfix;
     }
 
     @Override
