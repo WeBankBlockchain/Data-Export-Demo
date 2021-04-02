@@ -54,6 +54,8 @@ public class ExportService {
                             //群组id
                             .groupId(groupId)
                             .build(), config);
+                    //数据导出执行启动
+                    ExportDataSDK.start(exportExecutor);
                 }
             } else if(serviceConfig.getRpcUrl() != null) {
                 for(Integer groupId : serviceConfig.getGroupIds()) {
@@ -66,6 +68,8 @@ public class ExportService {
                             //群组id
                             .groupId(groupId)
                             .build(), config);
+                    //数据导出执行启动
+                    ExportDataSDK.start(exportExecutor);
                 }
             } else if(serviceConfig.getJdbcUrl() != null) {
                 exportExecutor = ExportDataSDK.create(dataSource, StashInfo.builder()
@@ -75,10 +79,10 @@ public class ExportService {
                         .pass(serviceConfig.getPassword())
                         .user(serviceConfig.getUser())
                         .build(), config);
+                //数据导出执行启动
+                ExportDataSDK.start(exportExecutor);
             }
-            //数据导出执行启动
-            assert exportExecutor != null;
-            ExportDataSDK.start(exportExecutor);
+
         } catch (Exception e) {
             log.error("ExportDataSDK.start failed",e);
         }
