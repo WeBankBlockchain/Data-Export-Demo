@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 LANG=zh_CN.UTF-8
 
+function LOG_INFO()
+{
+    local content=${1}
+    echo -e "\033[32m"${content}"\033[0m"
+}
 
 function docker_install()
 {
@@ -25,24 +30,17 @@ function docker_install()
           curl -fsSL https://get.docker.com -o get-docker.sh
           sudo sh get-docker.sh
       fi
+      if [ $? -ne 0 ]; then
+          LOG_INFO "docker自动化安装失败！请手动安装docker后，再启动脚本，安装参考链接：https://www.runoob.com/docker/ubuntu-docker-install.html"
+      else
+          LOG_INFO "docker install success"
+      fi
     fi
     # create share network==bridge
     #docker network create share_network
 }
 
 docker_install
-
-function LOG_INFO()
-{
-    local content=${1}
-    echo -e "\033[32m"${content}"\033[0m"
-}
-
-if [ $? -ne 0 ]; then
-    LOG_INFO "docker自动化安装失败！请手动安装docker后，再启动脚本，安装参考链接：https://www.runoob.com/docker/ubuntu-docker-install.html"
-else
-    LOG_INFO "docker install success"
-fi
 
 BASE_DIR=`pwd`
 
