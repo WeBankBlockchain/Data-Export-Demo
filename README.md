@@ -101,7 +101,8 @@ system.contract0.binary=
 ```
 bash build_export.sh
 ```
-基本会自动安装docker，并拉取对应镜像，进行执行。
+上述脚本会自动安装docker，并拉取对应镜像，进行执行。如果docker安装失败，请手动安装后重新执行脚本。
+
 控制台可看到提示启动结果：
 
 ```
@@ -144,4 +145,18 @@ docker restart export
 其中inet后的ip地址，即为本机ip
 
 
+#### centos启动脚本报yum更新失败
 
+错误如：
+```
+yum更新失败：rpmdb: BDB0113 Thread/process 2673/140126198814528 failed: BDB1507 Thread died...
+```
+解决方式如下：
+```
+# cd /var/lib/rpm
+# ls
+Basenames     __db.001  __db.003  Group       Name          Packages     Requirename  Sigmd5
+Conflictname  __db.002  Dirnames  Installtid  Obsoletename  Providename  Sha1header   Triggername
+# rm -rf __db*
+# rpm --rebuilddb
+```
