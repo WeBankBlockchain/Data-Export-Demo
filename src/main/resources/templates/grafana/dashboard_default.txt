@@ -293,7 +293,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": false,
-          "rawSql": "SELECT\n  $__timeGroupAlias(block_timestamp,$__interval),\n  max(block_height) AS \"block_height\"\nFROM ${block_detail_info}\nWHERE\n  $__timeFilter(block_timestamp)\nGROUP BY 1\nORDER BY $__timeGroup(block_timestamp,$__interval)",
+          "rawSql": "SELECT\n  $__timeGroupAlias(block_time_stamp,$__interval),\n  max(block_height) AS \"block_height\"\nFROM ${block_detail_info}\nWHERE\n  $__timeFilter(block_time_stamp)\nGROUP BY 1\nORDER BY $__timeGroup(block_time_stamp,$__interval)",
           "refId": "A",
           "select": [
             [
@@ -318,7 +318,7 @@
             ]
           ],
           "table": "block_detail_info",
-          "timeColumn": "block_timestamp",
+          "timeColumn": "block_time_stamp",
           "timeColumnType": "datetime",
           "where": [
             {
@@ -600,7 +600,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT block_height, contract_name, method_name, block_timestamp from ${block_tx_detail_info} order by block_height;",
+          "rawSql": "SELECT block_height, contract_name, method_name, block_time_stamp from ${block_tx_detail_info} order by block_height;",
           "refId": "A",
           "select": [
             [
@@ -688,7 +688,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT block_height, contract_name, contract_address, block_timestamp from ${deployed_account_info};",
+          "rawSql": "SELECT block_height, contract_name, contract_address, block_time_stamp from ${deployed_account_info};",
           "refId": "A",
           "select": [
             [
