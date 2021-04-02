@@ -134,20 +134,20 @@ grafana run success
 
 通过如下命令可查看运行日志：
 ```
-docker logs -f export
+docker logs -f dataexport
 ```
 
 ## 修改配置
 
 停止运行，命令如下
 ```
-docker stop export
+docker stop dataexport
 ```
 
-修改配置后，重新启动，命令如下
+修改application.properties配置文件后，重新启动，命令如下
 
 ```
-docker restart export
+docker restart dataexport
 ```
 
 ## 可视化展示配置
