@@ -34,7 +34,7 @@ log为运行日志保存的地方。
 
 ## 配置证书（channel方式启动）
 
-将SDK证书拷贝到 **./tools/config/resources目录**下，SDK证书目录位于nodes/${ip}/sdk/目录下
+将链节点SDK证书拷贝到 **./data-export/config**下，SDK证书目录位于nodes/${ip}/sdk/目录下
 ```
 # 假设SDK证书位于~/fisco/nodes/127.0.0.1/sdk/目录
 cp -r ~/fisco/nodes/127.0.0.1/sdk/* ./data-export/config/
