@@ -8,7 +8,6 @@ import com.webank.blockchain.data.export.common.entity.ExportConfig;
 import com.webank.blockchain.data.export.common.entity.ExportDataSource;
 import com.webank.blockchain.data.export.common.entity.MysqlDataSource;
 import com.webank.blockchain.data.export.task.DataExportExecutor;
-import org.fisco.bcos.sdk.config.exceptions.ConfigException;
 
 import java.util.ArrayList;
 import java.util.List;
